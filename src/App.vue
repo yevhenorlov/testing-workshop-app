@@ -1,47 +1,65 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script lang="ts">
+import PreflightCheck from './components/PreflightCheck.vue'
+import UserList from './components/UserList.vue'
+import { fetchUsers } from './api'
+import type { User } from './types'
+
+export default {
+  name: 'App',
+  components: { PreflightCheck, UserList },
+  data(): { isLoading: boolean; users: User[] } {
+    return {
+      isLoading: true,
+      users: []
+    }
+  },
+  methods: {
+    async getUsers() {
+      try {
+        this.isLoading = true
+        const { data } = await fetchUsers()
+        const users = data.results
+        console.log(users)
+        this.users = this.prepareUsers(users)
+      } catch (err) {
+        console.error(err)
+      } finally {
+        this.isLoading = false
+      }
+    },
+    prepareUsers(users: User[]) {
+      return users
+        .filter((user) => user.mass !== 'unknown')
+        .map((user) => ({
+          ...user,
+          mass: user.mass.replace(',', '') // "1,234" => "1234"
+        }))
+    }
+  },
+  computed: {
+    totalMass() {
+      return this.users.reduce((total, { mass }) => (total += Number(mass)), 0)
+    },
+    maxHeight() {
+      return this.users.reduce(
+        (max, { height }) => (max > Number(height) ? max : Number(height)),
+        0
+      )
+    }
+  },
+  async mounted() {
+    this.getUsers()
+    console.log(await fetchUsers())
+  }
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="flex bg-gray-900 text-gray-100 w-screen h-screen justify-center items-center">
+    <div v-if="isLoading">Loading data...</div>
+    <div v-else>
+      <user-list class="mb-8" :users="users" />
+      <preflight-check :total-mass="totalMass" :max-height="maxHeight" />
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
