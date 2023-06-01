@@ -7,15 +7,15 @@ export default {
 
 <template>
   <ul class="grid gap-8">
-    <li class="grid grid-cols-3 gap-8 underline mb-2">
-      <div>name</div>
-      <div>height</div>
-      <div>mass</div>
+    <li class="grid grid-cols-3 gap-16 underline mb-2">
+      <div>PASSENGER</div>
+      <div>HEIGHT (CM)</div>
+      <div>MASS (KG)</div>
     </li>
-    <li v-for="user in users" :key="user.name" class="grid grid-cols-3 gap-8">
+    <li v-for="user in users" :key="user.name" class="grid grid-cols-3 gap-16">
       <div>{{ user.name }}</div>
-      <div>{{ user.height }}cm</div>
-      <div>{{ user.mass }}kg</div>
+      <div>{{ user.height }}</div>
+      <div>{{ user.mass }}</div>
     </li>
   </ul>
 </template>

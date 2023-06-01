@@ -11,6 +11,6 @@ type FetchUsersResponse = {
 }
 
 export const fetchUsers = async (): AxiosPromise<FetchUsersResponse> => {
-  const page = Math.floor(Math.random() * 2 + 1) // we randomize the page to emulate data changing over time in the database
+  const page = Math.floor(Math.random() * 10 + 1) // we randomize the page to emulate data changing over time in the database
   return axios.get(`${endpoints.users}${page ? `?page=${page}` : ''}`)
 }

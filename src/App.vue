@@ -3,6 +3,7 @@ import PreflightCheck from './components/PreflightCheck.vue'
 import UserList from './components/UserList.vue'
 import { fetchUsers } from './api'
 import type { User } from './types'
+import { CEILING_HEIGHT, CARRYING_CAPACITY } from './constants'
 
 export default {
   name: 'App',
@@ -45,7 +46,13 @@ export default {
         (max, { height }) => (max > Number(height) ? max : Number(height)),
         0
       )
-    }
+    },
+    heightLimit() {
+      return CEILING_HEIGHT
+    },
+    massLimit() {
+      return CARRYING_CAPACITY
+    },
   },
   async mounted() {
     this.getUsers()
@@ -55,7 +62,13 @@ export default {
 </script>
 
 <template>
-  <div class="flex bg-gray-900 text-gray-100 w-screen h-screen justify-center items-center">
+  <div class="flex bg-gray-900 text-gray-100 flex flex-col w-screen h-screen justify-center items-center">
+    <h1 class="text-3xl mb-4">Boarding in progress</h1>
+    <div class="mb-16">
+      <p>Millenium Falcon has limited carrying capacity
+        ({{ massLimit }}kg) AND low ceilings ({{ heightLimit }}cm).</p>
+      <p>Make sure the ship can carry everyone before take off.</p>
+    </div>
     <div v-if="isLoading">Loading data...</div>
     <div v-else>
       <user-list class="mb-8" :users="users" />
