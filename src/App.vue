@@ -4,6 +4,7 @@ import UserList from './components/UserList.vue'
 import { fetchUsers } from './api'
 import type { User } from './types'
 import { CEILING_HEIGHT, CARRYING_CAPACITY } from './constants'
+import { $t } from './i18n'
 
 export default {
   name: 'App',
@@ -35,6 +36,9 @@ export default {
           ...user,
           mass: user.mass.replace(',', '') // "1,234" => "1234"
         }))
+    },
+    $t(key: any) {
+      return $t(key)
     }
   },
   computed: {
@@ -65,16 +69,11 @@ export default {
   <div
     class="flex h-screen w-screen flex-col items-center justify-center bg-gray-900 text-gray-100"
   >
-    <h1 class="mb-4 text-3xl">Boarding in progress</h1>
+    <h1 class="mb-4 text-3xl">{{ $t('main.title') }}</h1>
     <div class="mb-16">
-      <p>
-        Millenium Falcon has limited carrying capacity ({{ massLimit }}kg) and low ceilings ({{
-          heightLimit
-        }}cm).
-      </p>
-      <p>Make sure the ship can carry everyone before take off.</p>
+      <p class="w-[700px]">{{ $t('main.description') }}</p>
     </div>
-    <div v-if="isLoading">Loading data...</div>
+    <div v-if="isLoading">{{ $t('general.loading') }}</div>
     <div v-else>
       <user-list class="mb-8" :users="users" />
       <preflight-check :total-mass="totalMass" :max-height="maxHeight" />
