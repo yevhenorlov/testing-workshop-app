@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 pt-8 border-t-2">
+  <div class="flex flex-col gap-4 border-t-2 pt-8">
     <div class="flex justify-between">
       <span>total mass:</span>
       <span> {{ totalMass }}kg</span>

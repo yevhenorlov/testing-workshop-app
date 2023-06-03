@@ -52,7 +52,7 @@ export default {
     },
     massLimit() {
       return CARRYING_CAPACITY
-    },
+    }
   },
   async mounted() {
     this.getUsers()
@@ -62,11 +62,16 @@ export default {
 </script>
 
 <template>
-  <div class="flex bg-gray-900 text-gray-100 flex flex-col w-screen h-screen justify-center items-center">
-    <h1 class="text-3xl mb-4">Boarding in progress</h1>
+  <div
+    class="flex h-screen w-screen flex-col items-center justify-center bg-gray-900 text-gray-100"
+  >
+    <h1 class="mb-4 text-3xl">Boarding in progress</h1>
     <div class="mb-16">
-      <p>Millenium Falcon has limited carrying capacity
-        ({{ massLimit }}kg) AND low ceilings ({{ heightLimit }}cm).</p>
+      <p>
+        Millenium Falcon has limited carrying capacity ({{ massLimit }}kg) and low ceilings ({{
+          heightLimit
+        }}cm).
+      </p>
       <p>Make sure the ship can carry everyone before take off.</p>
     </div>
     <div v-if="isLoading">Loading data...</div>

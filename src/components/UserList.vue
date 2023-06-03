@@ -7,7 +7,7 @@ export default {
 
 <template>
   <ul class="grid gap-8">
-    <li class="grid grid-cols-3 gap-16 underline mb-2">
+    <li class="mb-2 grid grid-cols-3 gap-16 underline">
       <div>PASSENGER</div>
       <div>HEIGHT (CM)</div>
       <div>MASS (KG)</div>
