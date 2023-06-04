@@ -10,11 +10,18 @@ const TRANSLATIONS = {
   'general.loading': 'Loading data...',
   'general.yes': 'Yes',
   'general.no': 'No',
-  'preflightCheck.totalMass.label': 'Total mass',
-  'preflightCheck.maxHeight.label': 'Tallest person height',
-  'preflightCheck.massWithinLimit.label': 'Mass within limit',
-  'preflightCheck.heightWithinLimit.label': 'Height within limit',
-  'preflightCheck.launch': 'LAUNCH!'
+  'preflightCheck.totalMass': 'Total mass',
+  'preflightCheck.maxHeight': 'Tallest person height',
+  'preflightCheck.massWithinLimit': 'Mass within limit',
+  'preflightCheck.heightWithinLimit': 'Height within limit',
+  'preflightCheck.launch': 'LAUNCH!',
+  'passengerList.passenger': 'Passenger',
+  'passengerList.height': 'Height (cm)',
+  'passengerList.mass': 'Mass (kg)',
+  'addPassenger.title': 'Add a passenger',
+  'addPassenger.name': 'Name',
+  'addPassenger.height': 'Height',
+  'addPassenger.mass': 'Mass'
 } as const
 
 export function $t(key: keyof typeof TRANSLATIONS) {

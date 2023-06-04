@@ -1,4 +1,5 @@
 <script lang="ts">
+import i18n from '@/mixins/i18n'
 import type { Passenger } from '@/types'
 
 export default {
@@ -6,10 +7,12 @@ export default {
   data() {
     return {
       name: '',
-      height: 0,
-      mass: 0
+      height: '',
+      mass: ''
     }
   },
+  mixins: [i18n],
+  emits: ['input'],
   computed: {
     passenger(): Passenger {
       return {
@@ -23,8 +26,8 @@ export default {
     handleSubmit() {
       this.$emit('input', this.passenger)
       this.name = ''
-      this.height = 0
-      this.mass = 0
+      this.height = ''
+      this.mass = ''
       this.$refs.name.focus()
     }
   }
@@ -32,17 +35,17 @@ export default {
 </script>
 
 <template>
-  <h3 class="mb-4 text-xl">Add a passenger:</h3>
+  <h3 class="mb-4 text-xl">{{ $t('addPassenger.title') }}:</h3>
   <form
     class="mb-8 grid appearance-none grid-cols-2 grid-rows-2 items-center gap-4"
     @submit.prevent="handleSubmit"
     @keyup.enter="handleSubmit"
   >
-    <label for="name">Name</label>
+    <label for="name">{{ $t('addPassenger.name') }}</label>
     <input ref="name" class="input" name="name" placeholder="name" v-model="name" />
-    <label for="height">Height</label>
+    <label for="height">{{ $t('addPassenger.height') }}</label>
     <input class="input" type="number" name="height" placeholder="height" v-model="height" />
-    <label for="mass">Mass</label>
+    <label for="mass">{{ $t('addPassenger.mass') }}</label>
     <input class="input" type="number" name="mass" placeholder="mass" v-model="mass" />
   </form>
 </template>

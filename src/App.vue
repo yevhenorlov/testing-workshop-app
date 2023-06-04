@@ -24,6 +24,17 @@ export default defineComponent({
     }
   },
   mixins: [i18n],
+  watch: {
+    passengers(passengers) {
+      console.log({ passengers })
+    },
+    totalMass(totalMass) {
+      console.log({ totalMass })
+    },
+    maxHeight(maxHeight) {
+      console.log({ maxHeight })
+    }
+  },
   methods: {
     async getPassengers() {
       try {
@@ -31,7 +42,6 @@ export default defineComponent({
         const { data } = await fetchPassengers()
         const passengers = data.results
         this.passengers = this.preparePassengers(passengers)
-        console.log(this.passengers)
       } catch (err) {
         console.error(err)
       } finally {
@@ -59,9 +69,7 @@ export default defineComponent({
   },
   computed: {
     totalMass() {
-      const res = this.passengers.reduce((total, { mass }) => (total += Number(mass)), 0)
-      console.log(res)
-      return res
+      return this.passengers.reduce((total, { mass }) => (total += Number(mass)), 0)
     },
     maxHeight() {
       return this.passengers.reduce(
@@ -84,7 +92,7 @@ export default defineComponent({
 
 <template>
   <div v-if="isLaunched" class="flex h-screen w-full items-center justify-center bg-black">
-    <video autoplay muted class="w-[1000px]">
+    <video autoplay muted class="w-[1000px]" title="hyperspace">
       <source src="/public/hyperspace.mp4" type="video/mp4" />
     </video>
   </div>
