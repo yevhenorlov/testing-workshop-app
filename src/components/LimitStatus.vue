@@ -1,6 +1,9 @@
 <script lang="ts">
+import i18n from '@/mixins/i18n'
+
 export default {
   name: 'LimitStatus',
+  mixins: [i18n],
   props: {
     predicate: {
       type: Boolean,
@@ -11,6 +14,6 @@ export default {
 </script>
 
 <template>
-  <span v-if="predicate" class="text-green-700">YES</span>
-  <span v-else class="text-red-700">NO</span>
+  <span v-if="predicate" class="text-green-700">{{ $t('general.yes') }}</span>
+  <span v-else class="text-red-700"> {{ $t('general.no') }}</span>
 </template>

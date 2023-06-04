@@ -1,16 +1,12 @@
 import axios from 'axios'
 import type { AxiosPromise } from 'axios'
-import type { User } from '../types'
+import type { FetchPassengersResponse } from '@/types'
 
 const endpoints = {
-  users: 'https://swapi.dev/api/people/'
+  passengers: 'https://swapi.dev/api/people/'
 }
 
-type FetchUsersResponse = {
-  results: User[]
-}
-
-export const fetchUsers = async (): AxiosPromise<FetchUsersResponse> => {
+export const fetchPassengers = async (): AxiosPromise<FetchPassengersResponse> => {
   const page = Math.floor(Math.random() * 10 + 1) // we randomize the page to emulate data changing over time in the database
-  return axios.get(`${endpoints.users}${page ? `?page=${page}` : ''}`)
+  return axios.get(`${endpoints.passengers}${page ? `?page=${page}` : ''}`)
 }

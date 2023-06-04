@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: 'UserList',
-  props: ['users']
+  name: 'PassengerList',
+  props: ['passengers']
 }
 </script>
 
@@ -12,10 +12,10 @@ export default {
       <div>HEIGHT (CM)</div>
       <div>MASS (KG)</div>
     </li>
-    <li v-for="user in users" :key="user.name" class="grid grid-cols-3 gap-16">
-      <div>{{ user.name }}</div>
-      <div>{{ user.height }}</div>
-      <div>{{ user.mass }}</div>
+    <li v-for="passenger in passengers" :key="passenger.name" class="grid grid-cols-3 gap-16">
+      <div>{{ passenger.name }}</div>
+      <div>{{ passenger.height }}</div>
+      <div>{{ passenger.mass }}</div>
     </li>
   </ul>
 </template>
