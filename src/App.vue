@@ -4,9 +4,10 @@ import UserList from './components/UserList.vue'
 import { fetchUsers } from './api'
 import type { User } from './types'
 import { CEILING_HEIGHT, CARRYING_CAPACITY } from './constants'
-import { $t } from './i18n'
+import i18n from '@/mixins/i18n'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'App',
   components: { PreflightCheck, UserList },
   data(): { isLoading: boolean; users: User[] } {
@@ -15,6 +16,7 @@ export default {
       users: []
     }
   },
+  mixins: [i18n],
   methods: {
     async getUsers() {
       try {
@@ -36,10 +38,10 @@ export default {
           ...user,
           mass: user.mass.replace(',', '') // "1,234" => "1234"
         }))
-    },
-    $t(key: any) {
-      return $t(key)
     }
+    /* $t(key: any) { */
+    /*   return $t(key) */
+    /* } */
   },
   computed: {
     totalMass() {
@@ -62,13 +64,11 @@ export default {
     this.getUsers()
     console.log(await fetchUsers())
   }
-}
+})
 </script>
 
 <template>
-  <div
-    class="flex h-screen w-screen flex-col items-center justify-center bg-gray-900 text-gray-100"
-  >
+  <div class="flex h-screen w-screen flex-col items-center justify-center bg-gray-900 text-gray-100">
     <h1 class="mb-4 text-3xl">{{ $t('main.title') }}</h1>
     <div class="mb-16">
       <p class="w-[700px]">{{ $t('main.description') }}</p>

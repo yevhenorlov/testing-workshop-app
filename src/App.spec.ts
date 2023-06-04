@@ -1,5 +1,5 @@
 import { render } from '@testing-library/vue'
-import App from './App.vue'
+import App from '@/App.vue'
 
 describe('App', () => {
   it('renders as expected', () => {

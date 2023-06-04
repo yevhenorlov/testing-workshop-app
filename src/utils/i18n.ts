@@ -3,8 +3,6 @@
 // changed upstream at any moment, therefore we need to mock them for
 // testing purposes (see setupTests.ts file)
 
-import { defineComponent } from 'vue'
-
 const TRANSLATIONS = {
   'main.title': 'Boarding in progress',
   'main.description':
@@ -18,10 +16,6 @@ const TRANSLATIONS = {
   'preflightCheck.heightWithinLimit.label': 'Height within limit'
 } as const
 
-export default defineComponent({
-  methods: {
-    $t(key: keyof typeof TRANSLATIONS) {
-      return TRANSLATIONS[key]
-    }
-  }
-})
+export function $t(key: keyof typeof TRANSLATIONS) {
+  return TRANSLATIONS[key]
+}

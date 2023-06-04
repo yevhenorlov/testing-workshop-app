@@ -1,11 +1,13 @@
 <script lang="ts">
 import LimitStatus from './LimitStatus.vue'
-import { CEILING_HEIGHT, CARRYING_CAPACITY } from '../constants'
+import { CEILING_HEIGHT, CARRYING_CAPACITY } from '@/constants'
+import i18n from '@/mixins/i18n'
 
 export default {
   name: 'PreflightCheck',
   props: ['totalMass', 'maxHeight'],
   components: { LimitStatus },
+  mixins: [i18n],
   computed: {
     isMassWithinLimit() {
       return this.totalMass < CARRYING_CAPACITY
@@ -20,19 +22,19 @@ export default {
 <template>
   <div class="flex flex-col gap-4 border-t-2 pt-8">
     <div class="flex justify-between">
-      <span>total mass:</span>
+      <span>{{ $t('preflightCheck.totalMass.label') }}:</span>
       <span> {{ totalMass }}kg</span>
     </div>
     <div class="flex justify-between">
-      <span>tallest person height:</span>
+      <span>{{ $t('preflightCheck.maxHeight.label') }}:</span>
       <span> {{ maxHeight }}cm</span>
     </div>
     <div class="flex justify-between">
-      <span>mass within limit:</span>
+      <span>{{ $t('preflightCheck.massWithinLimit.label') }}:</span>
       <limit-status :predicate="isMassWithinLimit" />
     </div>
     <div class="flex justify-between">
-      <span>height within limit:</span>
+      <span>{{ $t('preflightCheck.heightWithinLimit.label') }}:</span>
       <limit-status :predicate="isHeightWithinLimit" />
     </div>
   </div>
