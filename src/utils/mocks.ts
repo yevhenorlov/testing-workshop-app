@@ -21,10 +21,9 @@ export const mockPassenger = (key: string | number): Passenger => {
 }
 
 export const mockFetchPassengers = (
-  additionalPassengers: Passenger[] = []
 ): AxiosPromise<FetchPassengersResponse> => {
   const mockedPassengers = Array.from({ length: 5 }).map((_, i) => mockPassenger(i))
   return Promise.resolve(
-    mockAxiosResponse({ results: [...mockedPassengers, ...additionalPassengers] })
+    mockAxiosResponse({ results: mockedPassengers })
   )
 }

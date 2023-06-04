@@ -6,3 +6,11 @@
   font-family: 'Monocraft';
   src: url('./fonts/Monocraft.otf');
 }
+
+body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.input {
+  @apply appearance-none border-2 border-blue-800 bg-transparent p-4;
+}

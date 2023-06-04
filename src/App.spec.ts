@@ -1,10 +1,12 @@
-import { render } from '@testing-library/vue'
+import { render, screen } from '@testing-library/vue'
 import App from '@/App.vue'
+
+const { getByText, findByText } = screen
+const findByPartialText = (text: any) => findByText(text, { exact: false })
 
 describe('App', () => {
   it('renders as expected', async () => {
-    const { getByText, findByText } = render(App)
-    const findByPartialText = (text: any) => findByText(text, { exact: false })
+    render(App)
 
     const title = getByText('main.title')
     const description = getByText('main.description')

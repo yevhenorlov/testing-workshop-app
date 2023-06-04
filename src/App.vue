@@ -1,7 +1,9 @@
 <script lang="ts">
 import PreflightCheck from '@/components/PreflightCheck.vue'
+import AddPassenger from '@/components/AddPassenger.vue'
 import PassengerList from '@/components/PassengerList.vue'
 import { fetchPassengers } from '@/api'
+/* import { mockFetchPassengers as fetchPassengers } from '@/utils/mocks' */
 import type { Passenger } from '@/types'
 import { CEILING_HEIGHT, CARRYING_CAPACITY } from '@/constants'
 import i18n from '@/mixins/i18n'
@@ -9,10 +11,15 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'App',
-  components: { PreflightCheck, PassengerList },
-  data(): { isLoading: boolean; passengers: Passenger[] } {
+  components: { AddPassenger, PreflightCheck, PassengerList },
+  data(): {
+    isLoading: boolean
+    isLaunched: boolean
+    passengers: Passenger[]
+  } {
     return {
       isLoading: true,
+      isLaunched: false,
       passengers: []
     }
   },
@@ -38,6 +45,16 @@ export default defineComponent({
           ...passenger,
           mass: passenger.mass.replace(',', '') // "1,234" => "1234"
         }))
+    },
+    handleLaunch() {
+      this.isLaunched = true
+    },
+    handleAddPassenger(passenger: Passenger) {
+      const newPassengers = [...this.passengers, passenger]
+      this.passengers = newPassengers
+    },
+    handleRemovePassenger(id: Passenger['name']) {
+      this.passengers = this.passengers.filter(({ name }) => name !== id)
     }
   },
   computed: {
@@ -66,17 +83,21 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    class="flex h-screen w-screen flex-col items-center justify-center bg-gray-900 text-gray-100"
-  >
+  <div v-if="isLaunched" class="flex h-screen w-full items-center justify-center bg-black">
+    <video autoplay muted class="w-[1000px]">
+      <source src="/public/hyperspace.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div v-else class="flex h-screen w-screen min-w-[1000px] flex-col items-center justify-center">
     <h1 class="mb-4 text-3xl">{{ $t('main.title') }}</h1>
     <div class="mb-16">
       <p class="w-[700px]">{{ $t('main.description') }}</p>
     </div>
     <div v-if="isLoading">{{ $t('general.loading') }}</div>
     <div v-else>
-      <passenger-list class="mb-8" :passengers="passengers" />
-      <preflight-check :total-mass="totalMass" :max-height="maxHeight" />
+      <add-passenger @input="handleAddPassenger" />
+      <passenger-list class="mb-8" :passengers="passengers" @remove="handleRemovePassenger" />
+      <preflight-check :total-mass="totalMass" :max-height="maxHeight" @launch="handleLaunch" />
     </div>
   </div>
 </template>

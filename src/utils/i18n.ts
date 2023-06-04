@@ -13,7 +13,8 @@ const TRANSLATIONS = {
   'preflightCheck.totalMass.label': 'Total mass',
   'preflightCheck.maxHeight.label': 'Tallest person height',
   'preflightCheck.massWithinLimit.label': 'Mass within limit',
-  'preflightCheck.heightWithinLimit.label': 'Height within limit'
+  'preflightCheck.heightWithinLimit.label': 'Height within limit',
+  'preflightCheck.launch': 'LAUNCH!'
 } as const
 
 export function $t(key: keyof typeof TRANSLATIONS) {
