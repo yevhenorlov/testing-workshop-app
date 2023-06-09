@@ -40,6 +40,7 @@ export default {
     class="mb-8 grid appearance-none grid-cols-2 grid-rows-2 items-center gap-4"
     @submit.prevent="handleSubmit"
     @keyup.enter="handleSubmit"
+    autocomplete="off"
   >
     <label for="name">{{ $t('addPassenger.name') }}</label>
     <input ref="name" class="input" name="name" placeholder="name" v-model="name" />

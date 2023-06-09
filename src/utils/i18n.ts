@@ -6,7 +6,7 @@
 const TRANSLATIONS = {
   'main.title': 'Boarding in progress',
   'main.description':
-    'Millenium Falcon has limited carrying capacity and low ceilings. Make sure the ship can carry everyone before take off.',
+    'The Millenium Falcon has limited carrying capacity and low ceilings. Make sure the ship can carry everyone before taking off.',
   'general.loading': 'Loading data...',
   'general.yes': 'Yes',
   'general.no': 'No',

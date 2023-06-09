@@ -96,11 +96,12 @@ export default defineComponent({
       <source src="/public/hyperspace.mp4" type="video/mp4" />
     </video>
   </div>
-  <div v-else class="flex h-screen w-screen min-w-[1000px] flex-col items-center justify-center">
+  <div
+    v-else
+    class="flex h-full min-h-screen w-screen min-w-[1000px] flex-col items-center justify-center"
+  >
     <h1 class="mb-4 text-3xl">{{ $t('main.title') }}</h1>
-    <div class="mb-16">
-      <p class="w-[700px]">{{ $t('main.description') }}</p>
-    </div>
+    <p class="mb-16 w-[700px]">{{ $t('main.description') }}</p>
     <div v-if="isLoading">{{ $t('general.loading') }}</div>
     <div v-else>
       <add-passenger @input="handleAddPassenger" />
